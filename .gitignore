@@ -11,3 +11,4 @@ tests/data/out-deleted/
 tests/data/mapa.*
 *.pyc
 recovermap-report.csv
+tests/data/manifest-stress-450k.json

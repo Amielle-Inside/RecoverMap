@@ -60,11 +60,17 @@ class RecoverMapEngine:
         stack: list[tuple[object, str]] = [(self.fs.open_dir("/"), "")]
         while stack:
             d, prefix = stack.pop()
-            try:
-                items = list(d)
-            except Exception:
-                continue
-            for e in items:
+            # iteracao LAZY: uma entrada viva por vez — materializar a lista
+            # inteira com list(d) estoura RAM em diretorios com centenas de
+            # milhares de entradas (~2-3 KB por proxy SWIG)
+            iterator = iter(d)
+            while True:
+                try:
+                    e = next(iterator)
+                except StopIteration:
+                    break
+                except Exception:
+                    break  # diretorio ilegivel a partir daqui: segue o resto
                 name = self._entry_name(e)
                 if not name or name in (".", ".."):
                     continue
