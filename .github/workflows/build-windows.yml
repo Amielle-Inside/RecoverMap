@@ -24,17 +24,22 @@ jobs:
       - name: Smoke test do engine
         run: python -c "import sys; sys.path.insert(0,'.'); import recovermap.core; print('core OK')"
 
-      - name: Build RecoverMap.exe
+      - name: Build RecoverMap.exe (GUI)
         run: pyinstaller --noconfirm recovermap.spec
+
+      - name: Build RecoverMap-cli.exe (CLI, enxuto)
+        run: pyinstaller --noconfirm recovermap-cli.spec
 
       - name: Upload do artefato
         uses: actions/upload-artifact@v4
         with:
           name: RecoverMap-windows
-          path: dist/RecoverMap.exe
+          path: dist/*.exe
 
       - name: Release (apenas em tags)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/RecoverMap.exe
+          files: |
+            dist/RecoverMap.exe
+            dist/RecoverMap-cli.exe
