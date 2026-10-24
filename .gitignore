@@ -1,0 +1,13 @@
+.venv/
+dist/
+build/
+out/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+*.img
+tests/data/out/
+tests/data/out-deleted/
+tests/data/mapa.*
+*.pyc
+recovermap-report.csv

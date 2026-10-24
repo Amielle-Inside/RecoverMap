@@ -1,0 +1,38 @@
+name: build-windows
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  windows-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install pytsk3 PySide6 pyinstaller
+
+      - name: Smoke test do engine
+        run: python -c "import sys; sys.path.insert(0,'.'); import recovermap.core; print('core OK')"
+
+      - name: Build RecoverMap.exe
+        run: pyinstaller --noconfirm recovermap.spec
+
+      - name: Upload do artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: RecoverMap-windows
+          path: dist/RecoverMap.exe
+
+      - name: Release (apenas em tags)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/RecoverMap.exe

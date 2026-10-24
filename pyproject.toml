@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recovermap"
+version = "0.1.0"
+description = "Recuperacao de arquivos ILIMITADA a partir de discos e imagens: gera o mapa completo (CSV/JSON/HTML) e extrai tudo — NTFS, FAT, exFAT, ext2/3/4, HFS+"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Amielle" }]
+keywords = ["data recovery", "ntfs", "forensics", "sleuthkit", "undelete"]
+
+dependencies = ["pytsk3"]
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.6"]
+dev = ["pytest>=8", "pyinstaller>=6"]
+
+[project.scripts]
+recovermap = "recovermap.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["recovermap*"]

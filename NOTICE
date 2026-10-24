@@ -1,0 +1,14 @@
+RecoverMap
+Copyright 2026 Amielle
+
+This product includes software developed by third parties:
+
+== The Sleuth Kit (libtsk) via pytsk3 ==
+Copyright (c) Brian Carrier. Licensed under the IBM Common Public
+License (IPL 1.0) / BSD-style terms. https://www.sleuthkit.org/
+pytsk3 Python bindings: Copyright (c) Joachim Metz / Google LLC
+(ASF-style license). https://github.com/py4n6/pytsk
+
+RecoverMap is NOT affiliated with, endorsed by, or derived from DMDE
+(DM Disk Editor and Data Recovery, Dmitry Sidorov). All filesystem
+parsing is performed by The Sleuth Kit.
